@@ -78,7 +78,7 @@ h2 {
     all: unset;
     display: block;
     margin: 5px;
-    padding: 20px;
+    padding: 10px;
     border: 2px solid #ececec;
     border-radius: 0.5em;
     text-align: left;
@@ -109,7 +109,7 @@ h2 {
     all: unset;
     display: block;
     margin: 10px;
-    padding: 10px;
+    padding: 7px;
     border: 2px solid gray;
     border-radius: 0.5em;
     text-align: left;

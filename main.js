@@ -45,6 +45,10 @@ const createTask = (taskName) => {
     task.setAttribute("id", taskId);
     task.setAttribute("href", `#${taskId}`);
 
+    task.addEventListener("click", event => {
+        event.preventDefault();
+    });
+
     //Titulo de la tarea
     let title = document.createElement("h3");
     title.innerText = `${taskName}`;
