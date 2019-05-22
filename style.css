@@ -83,6 +83,8 @@ h2 {
     border-radius: 0.5em;
     text-align: left;
     background-color: white;
+    user-select: none;
+    cursor: pointer;
 }
 
 .task:hover {
