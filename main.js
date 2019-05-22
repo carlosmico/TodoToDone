@@ -35,18 +35,44 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    //Evento para la ventana modal
+    let modal = document.querySelector(".ventanaDetalleOut");
+
+    modal.addEventListener("click", event => {
+        if (event.target.className === "ventanaDetalleOut") {
+            modal.style.display = "none";
+        }
+    });
 });
 
 const createTask = (taskName) => {
-    const taskId = "task" + Math.random();
+    let tareaObj = {
+        name: ""
+    };
+
+    const taskId = new Date().getTime();
+
+    tareaObj.name = taskId;
 
     let task = document.createElement("a");
     task.classList.add('task');
     task.setAttribute("id", taskId);
     task.setAttribute("href", `#${taskId}`);
 
+    //Eliminamos el evento click de la tarea para permitir el drag
     task.addEventListener("click", event => {
         event.preventDefault();
+
+        //Evento para controlar la ventana modal de las tasks
+
+        let ventanaDetalle = document.querySelector(".ventanaDetalleOut");
+
+        ventanaDetalle.style.display = "block";
+
+        let vdTitle = document.querySelector("#taskDetailTitle");
+
+        vdTitle.innerText = tareaObj.name;
     });
 
     //Titulo de la tarea
@@ -77,25 +103,6 @@ const createTask = (taskName) => {
     //Creamos el div botonera
     let buttoner = document.createElement("div");
     buttoner.classList.toggle("buttoner");
-
-    //Asignacion de miembros
-    task.addEventListener("dblclick", event => {
-        //Si la clase del padre de la tarea es otra tarea no hacemos nada
-        if (event.target.parentNode.parentNode.parentNode.className !== 'subTasks') {
-            let miembro = document.createElement('img');
-            miembro.src = "./img/miembro.png";
-
-            miembro.classList.add("miembro-icon");
-
-
-
-            if (typeof buttoner.childNodes[2] === 'undefined') {
-                buttoner.appendChild(miembro);
-            } else {
-                buttoner.childNodes[2].remove();
-            }
-        }
-    });
 
     //Boton de completar
     let completeButton = document.createElement("button");
@@ -138,7 +145,24 @@ const createTask = (taskName) => {
     buttoner.appendChild(completeButton);
     buttoner.appendChild(removeButton);
 
-    //SUBTAREAS
+    //Asignacion de miembros
+    task.addEventListener("dblclick", event => {
+        //Si la clase de la tarea es task asignamos el miembro
+        if (event.target.parentNode.className === 'task') {
+            let miembro = document.createElement('img');
+            miembro.src = "./img/miembro.png";
+
+            miembro.classList.add("miembro-icon");
+
+            if (typeof buttoner.childNodes[2] === 'undefined') {
+                buttoner.appendChild(miembro);
+            } else {
+                buttoner.childNodes[2].remove();
+            }
+        }
+    });
+
+    //Subtareas
     let subTasks = document.createElement("div");
     subTasks.classList.add("subTasks");
 
@@ -149,16 +173,18 @@ const createTask = (taskName) => {
 
     subInput.addEventListener("keyup", event => {
         if (event.keyCode === 13) {
-            event.target.parentNode.appendChild(createTask(subInput.value));
+            let subTask = createTask(subInput.value);
+
+            subTask.classList.add("subTask");
+
+            event.target.parentNode.appendChild(subTask);
+
             subInput.value = "";
         }
     });
 
+    //Appends de Botoneras, Subtareas, etc.
     subTasks.appendChild(subInput);
-
-    //Reseteo draggable a los hijos de la task
-
-
     task.appendChild(subTasks);
     task.appendChild(buttoner);
 
