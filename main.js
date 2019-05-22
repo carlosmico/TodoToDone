@@ -40,10 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
 const createTask = (taskName) => {
     const taskId = "task" + Math.random();
 
-    let task = document.createElement("div");
+    let task = document.createElement("a");
     task.classList.add('task');
     task.setAttribute("id", taskId);
-    //task.setAttribute("href", `#${taskId}`);
+    task.setAttribute("href", `#${taskId}`);
 
     //Titulo de la tarea
     let title = document.createElement("h3");
