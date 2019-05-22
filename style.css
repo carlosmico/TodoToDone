@@ -62,6 +62,7 @@ h2 {
     border-radius: 0.5em;
     text-align: left;
     background-color: white;
+    width: 220px;
 }
 
 .inputFake {
@@ -69,6 +70,26 @@ h2 {
     margin: 10px;
     text-align: left;
     background-color: white;
+}
+
+
+/* === SCROLL BAR === */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+ ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+ ::-webkit-scrollbar-thumb {
+    background: #c7c7c7;
+}
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: rgb(185, 185, 185);
 }
 
 
@@ -187,27 +208,28 @@ button.jscolor {
 }
 
 .tasksList {
-    min-height: 60vh;
+    min-height: 50vh;
     max-height: 80vh;
 }
 
-.dragSection {
+.listsSection {
     position: relative;
-    display: grid;
+    display: flex;
+    flex-direction: row;
     overflow: auto;
     top: 0;
     bottom: 0;
 }
 
-.dragSection> :nth-child(1) {
+.listsSection> :nth-child(1) {
     grid-column: 1;
 }
 
-.dragSection> :nth-child(2) {
+.listsSection> :nth-child(2) {
     grid-column: 2;
 }
 
-.dragSection> :nth-child(3) {
+.listsSection> :nth-child(3) {
     grid-column: 3;
 }
 
