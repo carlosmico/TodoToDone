@@ -1,0 +1,223 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+    background-color: white;
+    font-family: 'Lato', sans-serif;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: #0288d1;
+    height: 50px;
+    color: white;
+}
+
+header * {
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menuBar {
+    position: sticky;
+    z-index: 2;
+    top: 50px;
+    height: 60px;
+    background-color: white;
+}
+
+.menuBar>input {
+    position: absolute;
+    left: 0px;
+}
+
+.menuBar>button {
+    position: absolute;
+    right: 0px;
+}
+
+h1 {
+    font-size: 1.5em;
+}
+
+h2 {
+    font-size: 1.1em;
+    margin: 0.5em;
+}
+
+.input {
+    all: unset;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid #f1f1f1;
+    border-radius: 0.5em;
+    text-align: left;
+    background-color: white;
+}
+
+.inputFake {
+    all: unset;
+    margin: 10px;
+    text-align: left;
+    background-color: white;
+}
+
+
+/* === TASK === */
+
+.task {
+    all: unset;
+    display: block;
+    margin: 5px;
+    padding: 20px;
+    border: 2px solid #ececec;
+    border-radius: 0.5em;
+    text-align: left;
+    background-color: white;
+}
+
+.task:hover {
+    transition: all ease-in-out 300ms;
+    border-radius: 1.4em;
+}
+
+.inputSubTask {
+    all: unset;
+    margin: 10px;
+    text-align: left;
+}
+
+.inputError::-webkit-input-placeholder {
+    color: red;
+}
+
+.taskList {
+    width: 50vw;
+    margin: 0 auto;
+}
+
+.taskCompleted {
+    all: unset;
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid gray;
+    border-radius: 0.5em;
+    text-align: left;
+    background-color: #85e289;
+}
+
+.taskUncompleted {
+    all: unset;
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 0.5em;
+    text-align: left;
+    background-color: red;
+}
+
+.buttoner {
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.buttoner * {
+    margin-left: 10px;
+}
+
+button {
+    all: unset;
+    border: 2px solid #f1f1f1;
+    /* background-color: #f6f6f6; */
+    border-radius: 20px;
+    padding: 5px;
+}
+
+button.jscolor {
+    border: 2px solid #f1f1f1 !important;
+    color: white !important;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid #f1f1f1;
+    border-radius: 0.5em;
+    background-color: #0288d1 !important;
+}
+
+.miembro-icon {
+    width: 35px;
+    height: 35px;
+}
+
+
+/* === Listas === */
+
+.list {
+    position: relative;
+    margin: 0.8em;
+    background-color: #f6f6f6;
+    border-radius: 1em;
+    min-height: 40vh;
+    max-height: 80vh;
+}
+
+.list>:nth-child(1) {
+    height: 30px;
+}
+
+.list>:nth-child(2) {
+    overflow: auto;
+    overflow-x: hidden;
+    max-height: 350px;
+    margin-bottom: 30px;
+}
+
+.tasksList {
+    min-height: 60vh;
+    max-height: 80vh;
+}
+
+.dragSection {
+    position: relative;
+    display: grid;
+    overflow: auto;
+    top: 0;
+    bottom: 0;
+}
+
+.dragSection> :nth-child(1) {
+    grid-column: 1;
+}
+
+.dragSection> :nth-child(2) {
+    grid-column: 2;
+}
+
+.dragSection> :nth-child(3) {
+    grid-column: 3;
+}
+
+.dragSection> :nth-child(4) {
+    grid-column: 4;
+}
+
+@media only screen and (max-width: 580px) {
+    .dragSection {
+        position: relative;
+        min-height: 500px;
+        display: flex;
+        flex-flow: column;
+    }
+}
