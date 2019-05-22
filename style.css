@@ -214,7 +214,7 @@ button.jscolor {
 
 .listsSection {
     position: relative;
-    display: flex;
+    display: grid;
     flex-direction: row;
     overflow: auto;
     top: 0;
