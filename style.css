@@ -228,7 +228,7 @@ button.jscolor {
 
 .vdcContent> :first-child>div {
     position: relative;
-    margin-bottom: 1em;
+    margin-left: 2em;
     width: 100%;
 }
 
@@ -248,8 +248,25 @@ button.jscolor {
     margin-left: 1em;
 }
 
-#description {
+.inputDetalle {
+    all: unset;
+    position: relative;
+    border-radius: 0.5em;
+    text-align: left;
+    background-color: rgb(247, 247, 247);
     width: 100%;
+    margin-top: 1em;
+    padding: 0.6em;
+}
+
+.detailSection {
+    margin-top: 2em;
+}
+
+.detailSection :first-child {
+    display: flex;
+    align-items: flex-start;
+    left: 0;
 }
 
 

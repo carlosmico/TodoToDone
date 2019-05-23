@@ -132,7 +132,8 @@ const createTask = (taskName) => {
         //Evento para eliminar la tarea
         vdRemoveButton.addEventListener('click', event => {
             ventanaDetalle.style.display = "none";
-            task.remove();
+            let taskToRemove = document.getElementById(taskObj.id)
+            taskToRemove.remove();
         });
     });
 
