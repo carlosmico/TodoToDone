@@ -1,3 +1,6 @@
+let tasksArray = [];
+let taskObj;
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Ya he cargado el DOM');
 
@@ -49,7 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
 const createTask = (taskName) => {
     const taskId = new Date().getTime();
 
-    const taskObj = new Task(taskId, taskName, new Date().toGMTString());
+    //Instanciamos el objeto de la tarea y la añadimos al array
+    tasksArray.push(new Task(taskId, taskName, new Date().toGMTString()));
 
     let task = document.createElement("a");
     task.classList.add('task');
@@ -64,19 +68,30 @@ const createTask = (taskName) => {
     //Evento para ventana modal
 
     task.addEventListener("dblclick", event => {
-        let ventanaDetalle = document.querySelector(".ventanaDetalleOut");
+        taskObj = searchTaskObj(taskId);
+        console.log(taskObj);
 
+        let ventanaDetalle = document.querySelector(".ventanaDetalleOut");
         ventanaDetalle.style.display = "block";
 
         let vdTitle = document.querySelector("#taskDetailTitle");
         let vdCloseButton = document.querySelector("#vdClose");
+        let vdRemoveButton = document.querySelector("#vdRemove");
         let vdFechaCreacion = document.querySelector("#fechaCreacion");
+        let vdDescription = document.querySelector("#description");
+
+        let descriptionPlaceHolder = "Add a more detailed description...";
 
         //Rellenamos los datos de la ventana Detalle
         vdTitle.innerText = taskObj.getName();
         vdFechaCreacion.innerText = "Creation date: " + taskObj.getFechaCreacion();
+        console.log(taskObj)
+        if (taskObj.description !== "") {
+            vdDescription.value = taskObj.description;
+        } else {
+            vdDescription.value = "";
+        }
 
-        console.log(taskObj);
 
         //Evento para cerrar el modal
         vdCloseButton.addEventListener("click", event => {
@@ -84,20 +99,16 @@ const createTask = (taskName) => {
         });
 
         //Evento para editar el titulo
-        let taskNameTemp;
-
         vdTitle.setAttribute("contentEditable", true);
-
-        vdTitle.addEventListener("focus", event => {
-            taskNameTemp = event.target.innerText;
-        });
 
         vdTitle.addEventListener("blur", event => {
             if (event.target.innerText === "") {
-                event.target.innerText = taskNameTemp;
+                event.target.innerText = taskObj.getName();
             } else {
                 taskObj.setName(event.target.innerText);
-                title.innerText = taskObj.getName();
+
+                let titleExt = document.getElementById(taskObj.id).firstChild;
+                titleExt.innerText = taskObj.getName();
             }
         });
 
@@ -105,6 +116,23 @@ const createTask = (taskName) => {
             if (event.keyCode === 13) {
                 event.target.blur();
             }
+        });
+
+        //Evento para editar la descripción
+
+        vdDescription.addEventListener("blur", event => {
+            if (event.target.value === "") {
+                event.target.value = "";
+            } else {
+                taskObj.description = event.target.value;
+                updateTaskObj(taskObj);
+            }
+        });
+
+        //Evento para eliminar la tarea
+        vdRemoveButton.addEventListener('click', event => {
+            ventanaDetalle.style.display = "none";
+            task.remove();
         });
     });
 
@@ -148,8 +176,8 @@ const createTask = (taskName) => {
     //Titulo de la tarea
     let title = document.createElement("h3");
     title.innerText = `${taskName}`;
-    title.setAttribute("contentEditable", true);
 
+    title.setAttribute("contentEditable", true);
     let taskNameTemp;
 
     title.addEventListener("focus", event => {
@@ -160,7 +188,8 @@ const createTask = (taskName) => {
         if (event.target.innerText === "") {
             event.target.innerText = taskNameTemp;
         } else {
-            taskObj.setName(event.target.innerText);
+            taskObj.name = event.target.innerText;
+            updateTaskObj(taskObj);
             title.innerText = taskObj.getName();
         }
     });
@@ -178,42 +207,35 @@ const createTask = (taskName) => {
     buttoner.classList.toggle("buttoner");
 
     //Boton de completar
-    let completeButton = document.createElement("button");
-    completeButton.innerText = "✔️";
-    completeButton.addEventListener("click", event => {
+    // let completeButton = document.createElement("button");
+    // completeButton.innerText = "✔️";
+    // completeButton.addEventListener("click", event => {
 
 
-        if (completeButton.innerText === "✔️") {
-            completeButton.innerText = "❌"
+    //     if (completeButton.innerText === "✔️") {
+    //         completeButton.innerText = "❌"
 
-            //Si la clase del padre de la tarea es otra tarea la pintamos de verde sino a done
-            if (event.target.parentNode.parentNode.parentNode.className === 'subTasks') {
-                task.classList.toggle("taskCompleted");
-            } else {
-                let doing = document.querySelector('.done :nth-child(2)');
+    //         //Si la clase del padre de la tarea es otra tarea la pintamos de verde sino a done
+    //         if (event.target.parentNode.parentNode.parentNode.className === 'subTasks') {
+    //             task.classList.toggle("taskCompleted");
+    //         } else {
+    //             let doing = document.querySelector('.done :nth-child(2)');
 
-                doing.appendChild(task);
-            }
-        } else {
-            completeButton.innerText = "✔️"
+    //             doing.appendChild(task);
+    //         }
+    //     } else {
+    //         completeButton.innerText = "✔️"
 
-            //Si la clase del padre de la tarea es otra tarea la pintamos de verde sino a done
-            if (event.target.parentNode.parentNode.parentNode.className === 'subTasks') {
-                task.classList.toggle("taskCompleted");
-            } else {
-                let doing = document.querySelector('.toDo :nth-child(2)');
+    //         //Si la clase del padre de la tarea es otra tarea la pintamos de verde sino a done
+    //         if (event.target.parentNode.parentNode.parentNode.className === 'subTasks') {
+    //             task.classList.toggle("taskCompleted");
+    //         } else {
+    //             let doing = document.querySelector('.toDo :nth-child(2)');
 
-                doing.appendChild(task);
-            }
-        }
-    })
-
-    //Boton de eliminar
-    let removeButton = document.createElement("button");
-    removeButton.innerText = "🗑️";
-    removeButton.addEventListener('click', event => {
-        task.remove();
-    });
+    //             doing.appendChild(task);
+    //         }
+    //     }
+    // })
 
     // buttoner.appendChild(completeButton);
     // buttoner.appendChild(removeButton);
@@ -250,6 +272,8 @@ class Task {
         this.id = id;
         this.name = name;
         this.fechaCreacion = fechaCreacion;
+        this.description = "";
+        this.comments = [];
     }
 
     setName(name) {
@@ -263,6 +287,30 @@ class Task {
     getFechaCreacion() {
         return this.fechaCreacion;
     }
+
+    addComment(comment) {
+        this.comments.push(comment);
+    }
+
+    removeComment(index) {
+        this.comments.splice(index, 1);
+    }
+
+    getComments() {
+        return this.comments;
+    }
+}
+
+function searchTaskObj(id) {
+    for (const task of tasksArray) {
+        if (task.id === id) return task;
+    }
+}
+
+function updateTaskObj(taskObj) {
+    for (let task of tasksArray) {
+        if (task.id === taskObj.id) task = taskObj;
+    }
 }
 
 const changeBackground = (picker) => {
@@ -270,8 +318,6 @@ const changeBackground = (picker) => {
 
     document.body.style.backgroundColor = color;
     document.querySelector(".menuBar").style.backgroundColor = color;
-
-    console.log(color);
 }
 
 function allowDrop(ev) {
@@ -285,9 +331,6 @@ function drag(ev) {
 }
 
 function drop(ev) {
-    console.log(ev.dataTransfer);
-
-
     //Comprobamos que target ha recibido el evento de drop
     if (ev.target.className === "tasksList") {
         ev.preventDefault();
