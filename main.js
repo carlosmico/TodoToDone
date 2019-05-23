@@ -47,13 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const createTask = (taskName) => {
-    let tareaObj = {
-        name: ""
-    };
-
     const taskId = new Date().getTime();
 
-    tareaObj.name = taskId;
+    const taskObj = new Task(taskId, taskName, new Date().toGMTString());
 
     let task = document.createElement("a");
     task.classList.add('task');
@@ -63,17 +59,91 @@ const createTask = (taskName) => {
     //Eliminamos el evento click de la tarea para permitir el drag
     task.addEventListener("click", event => {
         event.preventDefault();
+    });
 
-        //Evento para controlar la ventana modal de las tasks
+    //Evento para ventana modal
 
+    task.addEventListener("dblclick", event => {
         let ventanaDetalle = document.querySelector(".ventanaDetalleOut");
 
         ventanaDetalle.style.display = "block";
 
         let vdTitle = document.querySelector("#taskDetailTitle");
+        let vdCloseButton = document.querySelector("#vdClose");
+        let vdFechaCreacion = document.querySelector("#fechaCreacion");
 
-        vdTitle.innerText = tareaObj.name;
+        //Rellenamos los datos de la ventana Detalle
+        vdTitle.innerText = taskObj.getName();
+        vdFechaCreacion.innerText = "Creation date: " + taskObj.getFechaCreacion();
+
+        console.log(taskObj);
+
+        //Evento para cerrar el modal
+        vdCloseButton.addEventListener("click", event => {
+            ventanaDetalle.style.display = "none";
+        });
+
+        //Evento para editar el titulo
+        let taskNameTemp;
+
+        vdTitle.setAttribute("contentEditable", true);
+
+        vdTitle.addEventListener("focus", event => {
+            taskNameTemp = event.target.innerText;
+        });
+
+        vdTitle.addEventListener("blur", event => {
+            if (event.target.innerText === "") {
+                event.target.innerText = taskNameTemp;
+            } else {
+                taskObj.setName(event.target.innerText);
+                title.innerText = taskObj.getName();
+            }
+        });
+
+        vdTitle.addEventListener("keydown", event => {
+            if (event.keyCode === 13) {
+                event.target.blur();
+            }
+        });
     });
+
+    //Evento para la asignación de miembros
+
+    task.onmouseover = event => {
+        event.target.onkeydown = event => {
+            if (event.keyCode === 32) {
+
+                let miembro = document.createElement('img');
+                miembro.src = "./img/miembro.png";
+
+                miembro.classList.add("miembro-icon");
+
+                if (typeof buttoner.childNodes[2] === 'undefined') {
+                    buttoner.appendChild(miembro);
+                } else {
+                    buttoner.childNodes[2].remove();
+                }
+            }
+        }
+    }
+
+    // Evento para asignar miembros
+    // task.addEventListener("dblclick", event => {
+    //     //Si la clase de la tarea es task asignamos el miembro
+    //     if (event.target.parentNode.className === 'task') {
+    //         let miembro = document.createElement('img');
+    //         miembro.src = "./img/miembro.png";
+
+    //         miembro.classList.add("miembro-icon");
+
+    //         if (typeof buttoner.childNodes[2] === 'undefined') {
+    //             buttoner.appendChild(miembro);
+    //         } else {
+    //             buttoner.childNodes[2].remove();
+    //         }
+    //     }
+    // });
 
     //Titulo de la tarea
     let title = document.createElement("h3");
@@ -89,6 +159,9 @@ const createTask = (taskName) => {
     title.addEventListener("blur", event => {
         if (event.target.innerText === "") {
             event.target.innerText = taskNameTemp;
+        } else {
+            taskObj.setName(event.target.innerText);
+            title.innerText = taskObj.getName();
         }
     });
 
@@ -142,53 +215,54 @@ const createTask = (taskName) => {
         task.remove();
     });
 
-    buttoner.appendChild(completeButton);
-    buttoner.appendChild(removeButton);
+    // buttoner.appendChild(completeButton);
+    // buttoner.appendChild(removeButton);
 
-    //Asignacion de miembros
-    task.addEventListener("dblclick", event => {
-        //Si la clase de la tarea es task asignamos el miembro
-        if (event.target.parentNode.className === 'task') {
-            let miembro = document.createElement('img');
-            miembro.src = "./img/miembro.png";
+    // //Subtareas
+    // let subTasks = document.createElement("div");
+    // subTasks.classList.add("subTasks");
 
-            miembro.classList.add("miembro-icon");
+    // let subInput = document.createElement('input');
+    // subInput.placeholder = "Add subtask...";
+    // subInput.name = "subTask";
+    // subInput.classList.add("inputSubTask");
 
-            if (typeof buttoner.childNodes[2] === 'undefined') {
-                buttoner.appendChild(miembro);
-            } else {
-                buttoner.childNodes[2].remove();
-            }
-        }
-    });
+    // subInput.addEventListener("keyup", event => {
+    //     if (event.keyCode === 13) {
+    //         let subTask = createTask(subInput.value);
 
-    //Subtareas
-    let subTasks = document.createElement("div");
-    subTasks.classList.add("subTasks");
+    //         subTask.classList.add("subTask");
 
-    let subInput = document.createElement('input');
-    subInput.placeholder = "Add subtask...";
-    subInput.name = "subTask";
-    subInput.classList.add("inputSubTask");
+    //         event.target.parentNode.appendChild(subTask);
 
-    subInput.addEventListener("keyup", event => {
-        if (event.keyCode === 13) {
-            let subTask = createTask(subInput.value);
+    //         subInput.value = "";
+    //     }
+    // });
 
-            subTask.classList.add("subTask");
-
-            event.target.parentNode.appendChild(subTask);
-
-            subInput.value = "";
-        }
-    });
-
-    //Appends de Botoneras, Subtareas, etc.
-    subTasks.appendChild(subInput);
-    task.appendChild(subTasks);
+    // subTasks.appendChild(subInput);
+    // task.appendChild(subTasks);
     task.appendChild(buttoner);
-
     return task;
+}
+
+class Task {
+    constructor(id, name, fechaCreacion) {
+        this.id = id;
+        this.name = name;
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    setName(name) {
+        this.name = name;
+    }
+
+    getName() {
+        return this.name;
+    }
+
+    getFechaCreacion() {
+        return this.fechaCreacion;
+    }
 }
 
 const changeBackground = (picker) => {

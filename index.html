@@ -63,24 +63,36 @@
         <div class="ventanaDetalleOut">
             <div class="ventanaDetalleContent">
                 <div class="vdcHeader">
-                    <h1 id="taskDetailTitle">Task title</h1>
-                    <img src="/img/close.png">
+                    <h1 id="taskDetailTitle"></h1>
+                    <img id="vdClose" src="/img/close.png">
                 </div>
 
                 <div class="vdcContent">
-                    <div id="description">
-                        <h3>Description</h3>
+                    <div>
+                        <div>
+                            <span id="fechaCreacion"></span>
+                        </div>
 
-                        <input id="taskDetailDescription" class="input">
+                        <div id="description">
+                            <h3>Description</h3>
+
+                            <input id="taskDetailDescription" class="input" placeholder="Add description...">
+                        </div>
+
+                        <div id="comments">
+                            <h3>Comments</h3>
+
+                            <input id="inputComments" class="input" placeholder="Add new comment...">
+
+                            <div id="commentsLists">
+
+                            </div>
+                        </div>
                     </div>
 
-                    <div id="comments">
-                        <h3>Comments</h3>
-
-                        <input id="inputComments" class="input" placeholder="Add new comment...">
-
-                        <div id="commentsLists">
-
+                    <div>
+                        <div>
+                            <button>🗑️ Remove</button>
                         </div>
                     </div>
                 </div>
