@@ -69,6 +69,7 @@ const createTask = (taskName) => {
 
     task.addEventListener("dblclick", event => {
         taskObj = searchTaskObj(taskId);
+
         console.log(taskObj);
 
         let ventanaDetalle = document.querySelector(".ventanaDetalleOut");
@@ -85,7 +86,7 @@ const createTask = (taskName) => {
         //Rellenamos los datos de la ventana Detalle
         vdTitle.innerText = taskObj.getName();
         vdFechaCreacion.innerText = "Creation date: " + taskObj.getFechaCreacion();
-        console.log(taskObj)
+
         if (taskObj.description !== "") {
             vdDescription.value = taskObj.description;
         } else {

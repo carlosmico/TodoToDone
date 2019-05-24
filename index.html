@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TodoToDone</title>
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
     <script src="./main.js"></script>
     <script src="./jscolor/jscolor.js"></script>
@@ -64,12 +64,13 @@
             <div class="ventanaDetalleContent">
                 <div class="vdcHeader">
                     <h1 id="taskDetailTitle"></h1>
-                    <img id="vdClose" src="/img/close.png">
+                    <!-- <img id="vdClose" src="./img/close.png"> -->
+                    <span id="vdClose">✖️</span>
                 </div>
 
                 <div class="vdcContent">
-                    <div>
-                        <div>
+                    <div class="vdcContentLeft">
+                        <div class="detailSection">
                             <span id="fechaCreacion"></span>
                         </div>
 
@@ -85,12 +86,11 @@
                             <input id="inputComments" class="inputDetalle" placeholder="Add new comment...">
 
                             <div id="commentsLists">
-
                             </div>
                         </div>
                     </div>
 
-                    <div>
+                    <div class="vdcContentRight">
                         <div>
                             <button id="vdRemove">🗑️ Remove</button>
                         </div>

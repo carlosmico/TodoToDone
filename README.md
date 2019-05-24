@@ -1,2 +1,3 @@
 # TodoToDone
-Proyecto inspirado en el famoso Trello para practicar DOM
+
+A simple development practice inspired by Trello.
