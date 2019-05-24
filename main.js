@@ -66,11 +66,8 @@ const createTask = (taskName) => {
     });
 
     //Evento para ventana modal
-
-    task.addEventListener("dblclick", event => {
+    const openModal = event => {
         taskObj = searchTaskObj(taskId);
-
-        console.log(taskObj);
 
         let ventanaDetalle = document.querySelector(".ventanaDetalleOut");
         ventanaDetalle.style.display = "block";
@@ -92,7 +89,6 @@ const createTask = (taskName) => {
         } else {
             vdDescription.value = "";
         }
-
 
         //Evento para cerrar el modal
         vdCloseButton.addEventListener("click", event => {
@@ -136,6 +132,14 @@ const createTask = (taskName) => {
             let taskToRemove = document.getElementById(taskObj.id)
             taskToRemove.remove();
         });
+    }
+
+    task.addEventListener("dblclick", event => {
+        openModal(event)
+    });
+
+    task.addEventListener("touchstart", event => {
+        openModal(event)
     });
 
     //Evento para la asignación de miembros

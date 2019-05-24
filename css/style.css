@@ -209,6 +209,30 @@ button.jscolor {
 
 /* === VentanaDetalle === */
 
+
+/* Modal Content */
+
+.ventanaDetalleOut {
+    display: none;
+    position: fixed;
+    z-index: 3;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.ventanaDetalleContent {
+    background-color: #fefefe;
+    margin: auto;
+    border: 1px lightgray solid;
+    border-radius: 1em;
+    margin-top: 5vh;
+    width: 80%;
+    height: 90%;
+}
+
 .vdcHeader {
     position: relative;
     display: flex;
@@ -245,7 +269,6 @@ button.jscolor {
 /* Contenido lateral izquierdo */
 
 .vdcContentLeft {
-    background-color: red;
     position: relative;
     width: 70%;
 }
@@ -254,9 +277,10 @@ button.jscolor {
 /* Divs del contenido lateral izquierdo */
 
 .detailSection {
-    background-color: green;
     position: relative;
-    margin-top: 2em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
 }
 
 .detailSection>input {
@@ -267,7 +291,6 @@ button.jscolor {
 /* Contenido lateral derecho */
 
 .vdcContentRight {
-    background-color: blue;
     position: relative;
     width: 30%;
 }
@@ -278,10 +301,23 @@ button.jscolor {
 
 .inputDetalle {
     all: unset;
-    padding: 10px;
+    padding: 0.5em;
     border-radius: 0.5em;
     text-align: left;
     background-color: rgb(247, 247, 247);
+    width: 90%;
+    margin-top: 0.7em;
+}
+
+
+/* === Right Buttoner === */
+
+.vdButtoner {
+    padding: 0.5em;
+}
+
+.vdButtoner>button {
+    margin: 1em;
 }
 
 
@@ -294,40 +330,14 @@ button.jscolor {
         flex-direction: column;
     }
     .vdcContentLeft {
-        background-color: red;
         position: relative;
         width: 100%;
     }
     .vdcContentRight {
-        background-color: blue;
         position: relative;
         width: 100%;
         margin-top: 1em;
     }
-}
-
-
-/* Modal Content */
-
-.ventanaDetalleOut {
-    display: none;
-    position: fixed;
-    z-index: 3;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.ventanaDetalleContent {
-    background-color: #fefefe;
-    margin: auto;
-    border: 1px lightgray solid;
-    border-radius: 1em;
-    margin-top: 5vh;
-    width: 80%;
-    height: 90%;
 }
 
 
