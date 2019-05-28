@@ -265,6 +265,20 @@ button.jscolor {
     display: flex;
 }
 
+#fechaCreacion {
+    color: gray;
+}
+
+.inputDetalle {
+    all: unset;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    text-align: left;
+    background-color: rgb(247, 247, 247);
+    width: 90%;
+    margin-top: 0.7em;
+}
+
 
 /* Contenido lateral izquierdo */
 
@@ -295,25 +309,16 @@ button.jscolor {
     width: 30%;
 }
 
-#fechaCreacion {
-    color: gray;
-}
-
-.inputDetalle {
-    all: unset;
-    padding: 0.5em;
-    border-radius: 0.5em;
-    text-align: left;
-    background-color: rgb(247, 247, 247);
-    width: 90%;
-    margin-top: 0.7em;
-}
-
 
 /* === Right Buttoner === */
 
 .vdButtoner {
     padding: 0.5em;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 .vdButtoner>button {
