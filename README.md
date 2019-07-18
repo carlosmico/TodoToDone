@@ -1,4 +1,4 @@
-# TodoToDone
+# ✔️ TodoToDone ✔️
 
 TodoToDone es una SPA inspirada en el famoso Trello desarrollada para practicar la manipulación del DOM con JavaScript Vanilla.
 
